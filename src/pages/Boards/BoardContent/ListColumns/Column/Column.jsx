@@ -21,8 +21,31 @@ import ListCards from "./ListCards/ListCards";
 import { mapOrder } from "~/utils/sorts";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { InputAdornment, TextField } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close"
+import { toast } from "react-toastify";
+
 
 const Column = ({ column }) => {
+  const [showInputCard, setShowInputCard] = useState(false)
+  const [newCardTitle, setNewCardTitle] = useState("")
+
+  const toggleShowInputCard = () => {
+    setShowInputCard(!showInputCard)
+    setNewCardTitle('')
+  }
+
+  const addNewCard = () => {
+    if (!newCardTitle) {
+      toast.error('Please enter card title!', { position: "top-right", theme: "colored" })
+      return
+    }
+
+    // console.log("newColumnTitle", newColumnTitle)
+    setNewCardTitle("")
+    setShowInputCard(false)
+  }
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -52,6 +75,7 @@ const Column = ({ column }) => {
           minWidth: "300px",
           maxWidth: "300px",
           ml: 2,
+          pb: "1px",
           bgcolor: (theme) =>
             theme.palette.mode == "dark" ? "#333643" : "#ebecf0",
           borderRadius: "6px",
@@ -140,20 +164,109 @@ const Column = ({ column }) => {
         {/* List cards */}
         <ListCards cards={orderedCards} />
 
-        <Box
-          sx={{
-            height: (theme) => theme.trello.columnFooterHeight,
-            p: 2,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <Button startIcon={<AddCardIcon />}>Add new card</Button>
-          <Tooltip title="Drag to move">
-            <DragHandleIcon sx={{ cursor: "pointer" }} />
-          </Tooltip>
-        </Box>
+        {
+          !showInputCard
+          ?
+          <Box
+            onClick={toggleShowInputCard}
+            sx={{
+              height: (theme) => theme.trello.columnFooterHeight,
+              p: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Button startIcon={<AddCardIcon />}>Add new card</Button>
+            <Tooltip title="Drag to move">
+              <DragHandleIcon sx={{ cursor: "pointer" }} />
+            </Tooltip>
+          </Box>
+          :
+          <Box
+            sx={{
+              minWidth: "280px",
+              maxWidth: "280px",
+              m: 1.3,
+              p: 1,
+              borderRadius: "6px",
+              height: "fit-content",
+              display: "flex",
+              bgcolor: "#ffffff3d",
+              flexDirection: "column",
+              gap: 1,
+            }}
+          >
+            <TextField
+              id="outlined-search"
+              label="Enter card title..."
+              type="text"
+              size="small"
+              variant="outlined"
+              autoFocus
+              value={newCardTitle}
+              onChange={(e) => setNewCardTitle(e.target.value)}
+              sx={{
+
+                "& label": {
+                  color: (theme) => theme.palette.primary.main,
+                  fontSize: "14px",
+                },
+                "& input": {
+                  color: (theme) => theme.palette.primary.main,
+                  bgcolor: (theme) => ( theme.palette.mode === 'dark' ? '#333643' : 'white')
+                },
+                "& label.Mui-focused": {
+                  color: (theme) => theme.palette.primary.main
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: (theme) => theme.palette.primary.main },
+                  "&:hover fieldset": { borderColor: (theme) => theme.palette.primary.main },
+                  "&.Mui-focused fieldset": { borderColor: (theme) => theme.palette.primary.main },
+                },
+                "& .MuiOutlinedInput-input": {
+                  borderRadius: 1
+                }
+              }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: 1,
+              }}
+            >
+              <Button
+                onClick={addNewCard}
+                variant="contained"
+                color="success"
+                size="small"
+                sx={{
+                  boxShadow: "none",
+                  border: "0.5px solid",
+                  borderColor: (theme) => theme.palette.success.main,
+                  "&:hover": {
+                    bgcolor: (theme) => theme.palette.success.main,
+                  },
+                }}
+              >
+                Add card
+              </Button>
+              <InputAdornment position="end">
+                <CloseIcon
+                  fontSize="small"
+                  sx={{
+                    color: (theme) => ( theme.palette.mode === 'dark' ? 'white' : '#333643' ),
+                    cursor: "pointer",
+                    "&:hover": { bgcolor: "rgba(246, 245, 245, 0.3)" },
+                  }}
+                  onClick={toggleShowInputCard}
+                />
+              </InputAdornment>
+            </Box>
+          </Box>
+
+        }
       </Box>
     </div>
   );

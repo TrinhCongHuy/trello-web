@@ -16,7 +16,7 @@ import Tooltip from "@mui/material/Tooltip"
 import Profiles from "./Menus/Profiles"
 import Button from "@mui/material/Button"
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd"
-import { InputAdornment } from "@mui/material"
+import InputAdornment from "@mui/material/InputAdornment"
 import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
 import { useState } from "react"
@@ -80,11 +80,13 @@ const AppBar = () => {
                 </InputAdornment>
               ),
               endAdornment: (
-                <CloseIcon 
-                  fontSize="small"
-                  sx={{ color: searchValue ? 'white' : 'transparent', cursor: 'pointer'}}
-                  onClick={() => setSearchValue('')}
-                />
+                <InputAdornment position="end">
+                  <CloseIcon 
+                    fontSize="small"
+                    sx={{ color: searchValue ? 'white' : 'transparent', cursor: 'pointer'}}
+                    onClick={() => setSearchValue('')}
+                  />
+                </InputAdornment>
               )
             }}
             label="Search..."
