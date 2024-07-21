@@ -1,32 +1,31 @@
 /* eslint-disable react/prop-types */
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { useState } from "react";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Divider from "@mui/material/Divider";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ContentCut from "@mui/icons-material/ContentCut";
-import ContentCopy from "@mui/icons-material/ContentCopy";
-import ContentPaste from "@mui/icons-material/ContentPaste";
-import Cloud from "@mui/icons-material/Cloud";
-import DeleteIcon from "@mui/icons-material/Delete";
-import AddCardIcon from "@mui/icons-material/AddCard";
-import DragHandleIcon from "@mui/icons-material/DragHandle";
-import ListCards from "./ListCards/ListCards";
-import { mapOrder } from "~/utils/sorts";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { InputAdornment, TextField } from "@mui/material";
+import Button from "@mui/material/Button"
+import Tooltip from "@mui/material/Tooltip"
+import Typography from "@mui/material/Typography"
+import Box from "@mui/material/Box"
+import { useState } from "react"
+import Menu from "@mui/material/Menu"
+import MenuItem from "@mui/material/MenuItem"
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
+import Divider from "@mui/material/Divider"
+import ListItemText from "@mui/material/ListItemText"
+import ListItemIcon from "@mui/material/ListItemIcon"
+import ContentCut from "@mui/icons-material/ContentCut"
+import ContentCopy from "@mui/icons-material/ContentCopy"
+import ContentPaste from "@mui/icons-material/ContentPaste"
+import Cloud from "@mui/icons-material/Cloud"
+import DeleteIcon from "@mui/icons-material/Delete"
+import AddCardIcon from "@mui/icons-material/AddCard"
+import DragHandleIcon from "@mui/icons-material/DragHandle"
+import ListCards from "./ListCards/ListCards"
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
+import { InputAdornment, TextField } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
-import { toast } from "react-toastify";
+import { toast } from "react-toastify"
 
 
-const Column = ({ column }) => {
+const Column = ({ column, createNewCard }) => {
   const [showInputCard, setShowInputCard] = useState(false)
   const [newCardTitle, setNewCardTitle] = useState("")
 
@@ -35,37 +34,42 @@ const Column = ({ column }) => {
     setNewCardTitle('')
   }
 
-  const addNewCard = () => {
+  const orderedCards = column.cards
+
+  const addNewCard = async () => {
     if (!newCardTitle) {
       toast.error('Please enter card title!', { position: "top-right", theme: "colored" })
       return
     }
 
-    // console.log("newColumnTitle", newColumnTitle)
+    const newCard = {
+      title: newCardTitle, 
+      columnId: column._id
+    }
+    await createNewCard(newCard)
+
     setNewCardTitle("")
     setShowInputCard(false)
   }
 
-  const [anchorEl, setAnchorEl] = useState(null);
-  const open = Boolean(anchorEl);
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
   const handleClose = () => {
-    setAnchorEl(null);
-  };
+    setAnchorEl(null)
+  }
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } =
-    useSortable({ id: column._id, data: { ...column } });
+    useSortable({ id: column._id, data: { ...column } })
 
   const dndKitColumnStyles = {
     transform: CSS.Translate.toString(transform),
     transition,
     height: "100%",
     opacity: isDragging ? 0.5 : undefined
-  };
-
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, "_id");
+  }
 
   return (
     <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
@@ -203,6 +207,7 @@ const Column = ({ column }) => {
               type="text"
               size="small"
               variant="outlined"
+              data-no-dnd="true"
               autoFocus
               value={newCardTitle}
               onChange={(e) => setNewCardTitle(e.target.value)}
@@ -269,7 +274,7 @@ const Column = ({ column }) => {
         }
       </Box>
     </div>
-  );
-};
+  )
+}
 
-export default Column;
+export default Column
