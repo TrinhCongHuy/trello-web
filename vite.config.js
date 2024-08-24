@@ -15,5 +15,12 @@ export default defineConfig({
     alias: [
       { find: '~', replacement: '/src' }
     ]
+  },
+  esbuild: {
+    loader: 'jsx',  // Thêm cấu hình này để Vite xử lý JSX trong các file .jsx
+    include: [
+      'src/**/*.js',
+      'src/**/*.jsx'
+    ]
   }
 })

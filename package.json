@@ -16,12 +16,21 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.21",
+    "@mui/lab": "^5.0.0-alpha.173",
     "@mui/material": "^5.15.21",
     "axios": "^1.7.2",
+    "dotenv": "^16.4.5",
+    "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
+    "material-ui-confirm": "^3.0.16",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-toastify": "^10.0.5"
+    "react-hook-form": "^7.52.2",
+    "react-otp-input": "^3.1.1",
+    "react-router-dom": "^6.25.1",
+    "react-toastify": "^10.0.5",
+    "sass": "^1.77.8",
+    "socket.io-client": "^4.7.5"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",

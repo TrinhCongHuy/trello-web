@@ -1,8 +1,13 @@
-import Board from "~/pages/Boards/_id"
+import { BrowserRouter as Router } from 'react-router-dom';
+import AllRoute from '~/routes';
 
-function App() {
+const App = () => {
   return (
-    <Board />
+    <>
+      <Router>
+        <AllRoute />
+      </Router>
+    </>
   )
 }
 

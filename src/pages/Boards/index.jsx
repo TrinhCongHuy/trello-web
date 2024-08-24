@@ -1,8 +1,14 @@
+import Container from "@mui/material/Container";
+import AppBar from "~/components/AppBar/AppBar";
+import BoardDashboard from "~/pages/Boards/BoardDashboard/BoardDashboard";
 
 const Boards = () => {
   return (
-    <div>Boards</div>
-  )
-}
+    <Container disableGutters maxWidth={false} sx={{ height: "100vh" }}>
+      <AppBar />
+      <BoardDashboard />
+    </Container>
+  );
+};
 
-export default Boards
+export default Boards;

@@ -1,0 +1,100 @@
+.page__sign-up {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #01b7f2;
+}
+
+.page__sign-up .container-xl {
+    display: flex;
+    background: white;
+    border-radius: 10px;
+    width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 0;
+}
+
+.page__sign-up img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+    // border-top-right-radius: 30%;
+    // border-bottom-left-radius: 30%;
+}
+
+.page__sign-up .form-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page__sign-up .form-container h2 {
+    margin-bottom: 1.5rem;
+    color: #000;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.page__sign-up .form-container .form-check {
+    margin-bottom: 1rem;
+    color: #6c757d;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.page__sign-up .form-container .form-group {
+    margin-bottom: 1rem;
+}
+
+.page__sign-up .form-container .form-label {
+    font-size: 1.4rem;
+}
+
+.page__sign-up .form-container .form-control{
+    height: 35px;
+    font-size: 1.4rem;
+}
+
+.page__sign-up .form-container .form-text {
+    margin-bottom: 1rem;
+    color: #6c757d;
+}
+
+.page__sign-up .form-container .btn-primary {
+    background-color: #01b7f2;
+    border: none;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    height: 40px;
+    font-size: 1.4rem;
+    transition: background-color 0.3s;
+}
+
+.page__sign-up .form-container .social-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.page__sign-up .form-container .social-button {
+    width: 48%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.page__sign-up .form-container .social-button img {
+    width: 30px;
+    height: 30px;
+    margin-right: 0.5rem;
+}

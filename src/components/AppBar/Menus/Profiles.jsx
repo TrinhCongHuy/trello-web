@@ -10,15 +10,24 @@ import Divider from '@mui/material/Divider';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import { handleLogoutApi } from "~/apis"
+import { useNavigate } from "react-router-dom"
 
 const Profiles = () => {
   const [anchorEl, setAnchorEl] = useState(null)
+  const navigate = useNavigate()
+
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const handleLogout = async () => {
+    await handleLogoutApi()
+    navigate('/sign-in')
   }
 
   return (
@@ -63,7 +72,7 @@ const Profiles = () => {
           </ListItemIcon>
           Settings
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

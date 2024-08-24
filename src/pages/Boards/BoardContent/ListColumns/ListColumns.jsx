@@ -14,7 +14,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import { toast } from "react-toastify"
 
 
-const ListColumns = ({ columns, createNewColumn, createNewCard }) => {
+const ListColumns = ({ columns, createNewColumn, createNewCard, deleteColumnInBoard }) => {
   const [showInputColum, setShowInputColum] = useState(false)
   const [newColumnTitle, setNewColumnTitle] = useState("")
 
@@ -22,7 +22,7 @@ const ListColumns = ({ columns, createNewColumn, createNewCard }) => {
 
   const addNewColum = async () => {
     if (!newColumnTitle) {
-      toast.error('Please enter column title!', { position: "top-right", theme: "colored" })
+      toast.error('Please enter column title!')
       return
     }
 
@@ -54,7 +54,7 @@ const ListColumns = ({ columns, createNewColumn, createNewCard }) => {
           }}
         >
           {columns?.map((column) => {
-            return <Column createNewCard={createNewCard} key={column._id} column={column} />
+            return <Column createNewCard={createNewCard} deleteColumnInBoard={deleteColumnInBoard} key={column._id} column={column} />
           })}
 
           {/* Box add new column */}
